@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Arbor Smart Care — Smart plant care systems that automate watering and monitoring. Explore DripMate, AquaTouch, and AquaFusion." />
+<title>Arbor Smart Care — Smarter Care for Greener Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- RESET & BASE ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+:root{
+  --green-50:#f0fdf4;
+  --green-100:#dcfce7;
+  --green-200:#bbf7d0;
+  --green-500:#22c55e;
+  --green-600:#16a34a;
+  --green-700:#15803d;
+  --green-900:#14532d;
+  --ink:#0f172a;
+  --ink-2:#334155;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --bg:#ffffff;
+  --bg-soft:#f8fafc;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.04);
+  --shadow:0 10px 30px rgba(15,23,42,.06);
+  --shadow-lg:0 25px 50px -12px rgba(15,23,42,.12);
+  --radius:18px;
+}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--ink)}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:96px 0;position:relative}
+.eyebrow{display:inline-block;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-700);font-weight:600;padding:6px 14px;background:var(--green-50);border-radius:999px;margin-bottom:18px}
+.section-head{text-align:center;max-width:680px;margin:0 auto 56px}
+.section-head h2{font-size:clamp(2rem,4vw,2.75rem);margin-bottom:16px}
+.section-head p{color:var(--muted);font-size:1.05rem}
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:.95rem;transition:all .25s ease;white-space:nowrap}
+.btn-primary{background:var(--green-600);color:#fff;box-shadow:0 6px 20px rgba(22,163,74,.25)}
+.btn-primary:hover{background:var(--green-700);transform:translateY(-2px);box-shadow:0 10px 30px rgba(22,163,74,.35)}
+.btn-secondary{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-secondary:hover{border-color:var(--green-600);color:var(--green-700);transform:translateY(-2px)}
+.btn svg{width:16px;height:16px;transition:transform .25s}
+.btn:hover svg{transform:translateX(3px)}
+
+/* ---------- NAVBAR ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:all .3s ease}
+.nav.scrolled{border-bottom-color:var(--line);background:rgba(255,255,255,.95)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1200px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;color:var(--ink)}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--green-500),var(--green-700));display:grid;place-items:center;color:#fff}
+.logo-mark svg{width:18px;height:18px}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{padding:8px 16px;border-radius:999px;font-size:.92rem;font-weight:500;color:var(--ink-2);transition:all .2s}
+.nav-links a:hover{color:var(--green-700);background:var(--green-50)}
+.nav-cta{margin-left:12px}
+.menu-toggle{display:none;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;background:var(--bg-soft)}
+.menu-toggle span{display:block;width:20px;height:2px;background:var(--ink);position:relative;transition:all .3s}
+.menu-toggle span::before,.menu-toggle span::after{content:'';position:absolute;left:0;width:20px;height:2px;background:var(--ink);transition:all .3s}
+.menu-toggle span::before{top:-6px}
+.menu-toggle span::after{top:6px}
+.menu-toggle.active span{background:transparent}
+.menu-toggle.active span::before{top:0;transform:rotate(45deg)}
+.menu-toggle.active span::after{top:0;transform:rotate(-45deg)}
+
+/* ---------- HERO ---------- */
+.hero{padding:140px 0 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-10%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,var(--green-100),transparent 70%);border-radius:50%;z-index:-1}
+.hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,var(--green-50),transparent 70%);border-radius:50%;z-index:-1}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.hero-text h1{font-size:clamp(2.5rem,5.5vw,4.25rem);margin-bottom:20px}
+.hero-text h1 .accent{color:var(--green-600);font-style:italic}
+.hero-text p.lead{font-size:1.2rem;color:var(--muted);margin-bottom:36px;max-width:520px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:32px;margin-top:56px;padding-top:32px;border-top:1px solid var(--line)}
+.stat-num{font-family:'Fraunces',serif;font-size:1.85rem;font-weight:600;color:var(--green-700)}
+.stat-lbl{font-size:.85rem;color:var(--muted)}
+.hero-visual{position:relative}
+.hero-img-wrap{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5;background:var(--bg-soft)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover}
+.hero-badge{position:absolute;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+.badge-top{top:24px;left:-20px;animation:float 6s ease-in-out infinite}
+.badge-bot{bottom:32px;right:-20px;animation:float 6s ease-in-out infinite 3s}
+.badge-dot{width:10px;height:10px;border-radius:50%;background:var(--green-500);box-shadow:0 0 0 4px var(--green-100);animation:pulse 2s infinite}
+.badge-text{font-size:.8rem}
+.badge-text strong{display:block;font-size:.9rem;color:var(--ink)}
+.badge-text span{color:var(--muted)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px var(--green-100)}50%{box-shadow:0 0 0 8px rgba(34,197,94,.2)}}
+
+/* ---------- ABOUT ---------- */
+.about{background:var(--bg-soft)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-text h2{font-size:clamp(2rem,3.5vw,2.5rem);margin-bottom:20px}
+.about-text p{color:var(--ink-2);margin-bottom:16px;font-size:1.05rem}
+.founders{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap}
+.founder{display:flex;align-items:center;gap:12px;padding:12px 18px;background:#fff;border-radius:14px;border:1px solid var(--line)}
+.founder-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--green-400,#4ade80),var(--green-700));display:grid;place-items:center;color:#fff;font-weight:600;font-size:.9rem}
+.founder-info strong{display:block;font-size:.9rem}
+.founder-info span{font-size:.78rem;color:var(--muted)}
+.about-visual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-card{background:#fff;padding:28px;border-radius:var(--radius);border:1px solid var(--line);transition:transform .3s}
+.about-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.about-card:nth-child(1){margin-top:30px}
+.about-card-icon{width:48px;height:48px;border-radius:12px;background:var(--green-50);color:var(--green-700);display:grid;place-items:center;margin-bottom:16px}
+.about-card h4{font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;margin-bottom:6px}
+.about-card p{font-size:.88rem;color:var(--muted);margin:0}
+
+/* ---------- MODELS ---------- */
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.model-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:36px 28px;position:relative;transition:all .35s ease;overflow:hidden}
+.model-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green-500),var(--green-700));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.model-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--green-200)}
+.model-card:hover::before{transform:scaleX(1)}
+.model-icon{width:64px;height:64px;border-radius:18px;background:var(--green-50);color:var(--green-700);display:grid;place-items:center;margin-bottom:24px;transition:all .3s}
+.model-card:hover .model-icon{background:var(--green-600);color:#fff;transform:rotate(-6deg) scale(1.05)}
+.model-icon svg{width:30px;height:30px}
+.model-tier{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
+.model-card h3{font-size:1.6rem;margin-bottom:12px}
+.model-card > p{color:var(--muted);font-size:.95rem;margin-bottom:20px;min-height:80px}
+.model-specs{list-style:none;margin-bottom:24px}
+.model-specs li{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--ink-2);padding:6px 0}
+.model-specs li svg{width:16px;height:16px;color:var(--green-600);flex-shrink:0}
+.model-link{display:inline-flex;align-items:center;gap:6px;color:var(--green-700);font-weight:600;font-size:.92rem;transition:gap .25s}
+.model-link:hover{gap:10px}
+.model-featured{background:linear-gradient(180deg,var(--green-900),#0d3b21);color:#fff;border:none}
+.model-featured::before{background:linear-gradient(90deg,#86efac,#fff);transform:scaleX(1)}
+.model-featured h3,.model-featured .model-tier{color:#fff}
+.model-featured > p,.model-featured .model-specs li{color:rgba(255,255,255,.75)}
+.model-featured .model-icon{background:rgba(255,255,255,.1);color:#fff}
+.model-featured:hover .model-icon{background:#fff;color:var(--green-700)}
+.model-featured .model-specs li svg{color:#86efac}
+.model-featured .model-link{color:#86efac}
+.model-badge{position:absolute;top:20px;right:20px;background:#fff;color:var(--green-700);padding:4px 12px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.05em}
+
+/* ---------- FEATURES ---------- */
+.features{background:var(--bg-soft)}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.feature{background:#fff;padding:32px 24px;border-radius:var(--radius);border:1px solid var(--line);text-align:left;transition:all .3s}
+.feature:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--green-200)}
+.feature-icon{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--green-50),var(--green-100));color:var(--green-700);display:grid;place-items:center;margin-bottom:20px}
+.feature h4{font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:8px}
+.feature p{font-size:.9rem;color:var(--muted)}
+
+/* ---------- HOW IT WORKS ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.steps::before{content:'';position:absolute;top:40px;left:10%;right:10%;height:2px;background:repeating-linear-gradient(90deg,var(--green-200) 0,var(--green-200) 6px,transparent 6px,transparent 14px);z-index:0}
+.step{text-align:center;position:relative;z-index:1}
+.step-num{width:80px;height:80px;border-radius:50%;background:#fff;border:2px solid var(--green-200);color:var(--green-700);display:grid;place-items:center;margin:0 auto 20px;font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;transition:all .3s;position:relative}
+.step-num::after{content:attr(data-num);position:absolute;top:-8px;right:-8px;width:26px;height:26px;background:var(--green-600);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:.7rem;font-weight:700;font-family:'Inter',sans-serif}
+.step:hover .step-num{background:var(--green-600);color:#fff;border-color:var(--green-600);transform:scale(1.05)}
+.step h4{font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:6px}
+.step p{font-size:.88rem;color:var(--muted)}
+
+/* ---------- TESTIMONIALS ---------- */
+.testimonials{background:var(--bg-soft)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial{background:#fff;padding:32px;border-radius:var(--radius);border:1px solid var(--line);position:relative;transition:all .3s}
+.testimonial:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.quote-mark{font-family:'Fraunces',serif;font-size:3.5rem;line-height:1;color:var(--green-200);position:absolute;top:16px;right:24px}
+.stars{display:flex;gap:3px;margin-bottom:16px;color:#f59e0b}
+.testimonial p.quote{color:var(--ink-2);font-size:.98rem;margin-bottom:24px;position:relative;z-index:1}
+.testimonial-person{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid var(--line)}
+.t-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#86efac,var(--green-700));display:grid;place-items:center;color:#fff;font-weight:600}
+.t-info strong{display:block;font-size:.92rem}
+.t-info span{font-size:.8rem;color:var(--muted)}
+
+/* ---------- CTA ---------- */
+.cta-section{padding:80px 24px}
+.cta-box{max-width:1000px;margin:0 auto;background:linear-gradient(135deg,var(--green-700) 0%,var(--green-900) 100%);color:#fff;border-radius:32px;padding:72px 48px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before,.cta-box::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.05)}
+.cta-box::before{width:300px;height:300px;top:-150px;right:-100px}
+.cta-box::after{width:200px;height:200px;bottom:-100px;left:-50px}
+.cta-box h2{color:#fff;font-size:clamp(2rem,4vw,3rem);margin-bottom:16px;position:relative}
+.cta-box p{color:rgba(255,255,255,.85);font-size:1.1rem;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;position:relative}
+.cta-box .btn-primary{background:#fff;color:var(--green-700);position:relative}
+.cta-box .btn-primary:hover{background:var(--green-50);color:var(--green-900)}
+.cta-box .btn-secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.4);position:relative}
+.cta-box .btn-secondary:hover{background:rgba(255,255,255,.1);border-color:#fff;color:#fff}
+.cta-box .hero-ctas{justify-content:center}
+
+/* ---------- CONTACT ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+.contact-info h2{font-size:clamp(1.8rem,3vw,2.3rem);margin-bottom:16px}
+.contact-info p{color:var(--muted);margin-bottom:32px}
+.contact-items{display:flex;flex-direction:column;gap:20px}
+.contact-item{display:flex;gap:16px;align-items:flex-start}
+.contact-item-icon{width:44px;height:44px;border-radius:12px;background:var(--green-50);color:var(--green-700);display:grid;place-items:center;flex-shrink:0}
+.contact-item strong{display:block;font-size:.95rem;margin-bottom:2px}
+.contact-item span{color:var(--muted);font-size:.92rem}
+.contact-form{background:#fff;padding:36px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.85rem;font-weight:500;margin-bottom:6px;color:var(--ink-2)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:.95rem;color:var(--ink);background:#fff;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--green-600)}
+.form-group textarea{min-height:120px;resize:vertical}
+.contact-form .btn{width:100%;justify-content:center;margin-top:8px}
+
+/* ---------- FOOTER ---------- */
+footer{background:#0a1f12;color:rgba(255,255,255,.7);padding:72px 0 32px;position:relative}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.footer-brand .logo{color:#fff;margin-bottom:16px}
+.footer-brand p{font-size:.92rem;max-width:340px;margin-bottom:24px}
+.socials{display:flex;gap:12px}
+.social{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;transition:all .25s}
+.social:hover{background:var(--green-600);transform:translateY(-3px)}
+.social svg{width:18px;height:18px}
+.footer-col h5{color:#fff;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{font-size:.92rem;transition:color .2s}
+.footer-col a:hover{color:var(--green-500)}
+.footer-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:.85rem}
+.footer-bot .tagline{color:var(--green-500);font-family:'Fraunces',serif;font-style:italic}
+
+/* ---------- ANIMATIONS ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:1024px){
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
+  .models-grid,.testimonials-grid{grid-template-columns:1fr;max-width:500px;margin:0 auto}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr);gap:40px}
+  .steps::before{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .hero-badge{display:none}
+}
+@media(max-width:768px){
+  section{padding:72px 0}
+  .hero{padding:120px 0 60px}
+  .nav-links{position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:#fff;flex-direction:column;align-items:stretch;padding:100px 24px 32px;gap:4px;box-shadow:-20px 0 40px rgba(0,0,0,.1);transition:right .35s ease;z-index:90}
+  .nav-links.open{right:0}
+  .nav-links a{padding:14px 18px;font-size:1rem}
+  .nav-cta{margin:16px 0 0;text-align:center}
+  .menu-toggle{display:flex}
+  .form-row{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .footer-bot{justify-content:center;text-align:center}
+  .hero-stats{gap:20px;flex-wrap:wrap}
+  .cta-box{padding:48px 28px}
+  .contact-form{padding:24px}
+  .about-visual{grid-template-columns:1fr}
+  .about-card:nth-child(1){margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12c0-4 3-8 8-8-1 5-4 8-8 8z"/><path d="M12 14c0-3-2-6-6-6 1 4 3 6 6 6z"/></svg>
+      </span>
+      Arbor
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#models">Models</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it Works</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Get Started</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <span class="eyebrow">🌱 Smarter Care for Greener Living</span>
+        <h1>Smart Plant Care, <span class="accent">Made Effortless.</span></h1>
+        <p class="lead">Automate, control, and grow your plants with precision. Arbor blends nature with intelligent technology — so your plants thrive, even when you're busy.</p>
+        <div class="hero-ctas">
+          <a href="#models" class="btn btn-primary">Explore Models
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary">Get Started</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">3</div><div class="stat-lbl">Smart Models</div></div>
+          <div><div class="stat-num">98%</div><div class="stat-lbl">Water Saved</div></div>
+          <div><div class="stat-num">24/7</div><div class="stat-lbl">Auto Monitoring</div></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=900&q=80" alt="Lush green smart potted plant" onerror="this.src='https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=900&q=80'"/>
+        </div>
+        <div class="hero-badge badge-top">
+          <span class="badge-dot"></span>
+          <div class="badge-text"><strong>Watering Active</strong><span>Soil moisture optimal</span></div>
+        </div>
+        <div class="hero-badge badge-bot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"><path d="M12 2v6m0 0l3-3m-3 3L9 5m3 15a7 7 0 01-7-7c0-3 7-11 7-11s7 8 7 11a7 7 0 01-7 7z"/></svg>
+          <div class="badge-text"><strong>68% Moisture</strong><span>Perfect conditions</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="eyebrow">About Arbor</span>
+        <h2>Where technology meets nature.</h2>
+        <p>Arbor Smart Care is an innovative plant-tech startup built on a simple belief: caring for plants should be joyful — not a chore. Founded by <strong>Arnav</strong> and <strong>Vrushabh</strong>, we combine intelligent automation with beautiful design to make plant parenthood effortless for everyone.</p>
+        <p>From forgetful beginners to passionate plant collectors, Arbor gives every leaf the precise care it deserves — using smart sensors, automated watering, and thoughtful control.</p>
+        <div class="founders">
+          <div class="founder"><div class="founder-avatar">A</div><div class="founder-info"><strong>Arnav</strong><span>Founder</span></div></div>
+          <div class="founder"><div class="founder-avatar">V</div><div class="founder-info"><strong>Vrushabh</strong><span>Founder</span></div></div>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <div class="about-card">
+          <div class="about-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7l-9-5z"/></svg></div>
+          <h4>Reliable</h4><p>Built to run 24/7 with precision engineering.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+          <h4>Efficient</h4><p>Saves up to 98% of water vs. manual care.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h4>Always On</h4><p>Monitor and automate your garden in real-time.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12c0 4-4 8-8 8s-8-4-8-8 4-8 8-8 8 4 8 8z"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <h4>Intuitive</h4><p>Designed for both beginners and experts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section id="models">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Models</span>
+      <h2>Choose your level of control</h2>
+      <p>Three intelligent systems — each designed to fit seamlessly into your lifestyle. From fully hands-free to total precision control.</p>
+    </div>
+    <div class="models-grid">
+      <!-- DripMate -->
+      <div class="model-card reveal">
+        <div class="model-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 8 7 13a7 7 0 11-14 0c0-5 7-13 7-13z"/><path d="M8 14a4 4 0 004 4"/></svg></div>
+        <div class="model-tier">Tier 01 • Auto</div>
+        <h3>DripMate</h3>
+        <p>A fully automatic plant care system that works without any mobile app. Perfect for a simple, hands-free solution.</p>
+        <ul class="model-specs">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Zero-app, plug & play</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Auto moisture detection</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Smart water dispensing</li>
+        </ul>
+        <a href="#contact" class="model-link">Learn more
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- AquaTouch -->
+      <div class="model-card reveal">
+        <div class="model-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/><path d="M10 6c1 2 2 2 2 4s-1 2-2 4"/></svg></div>
+        <div class="model-tier">Tier 02 • Manual</div>
+        <h3>AquaTouch</h3>
+        <p>A fully manual system controlled through a mobile app — giving you complete control over watering anytime, anywhere.</p>
+        <ul class="model-specs">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Full mobile app control</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Remote watering anywhere</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Live moisture dashboard</li>
+        </ul>
+        <a href="#contact" class="model-link">Learn more
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- AquaFusion -->
+      <div class="model-card model-featured reveal">
+        <span class="model-badge">★ Best Value</span>
+        <div class="model-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+        <div class="model-tier">Tier 03 • Hybrid</div>
+        <h3>AquaFusion</h3>
+        <p>The ultimate hybrid — combines automation and manual control. Switch between auto operation and mobile-based control for maximum flexibility.</p>
+        <ul class="model-specs">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Auto + manual modes</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Full app + sensor suite</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>Advanced analytics</li>
+        </ul>
+        <a href="#contact" class="model-link">Pre-order now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Everything your plants need</h2>
+      <p>Thoughtfully engineered features that make plant care simple, efficient, and enjoyable.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s7 8 7 13a7 7 0 11-14 0c0-5 7-13 7-13z"/></svg></div>
+        <h4>Automatic Watering</h4>
+        <p>Smart sensors detect soil moisture and water your plants exactly when they need it — never too much, never too little.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h4>Mobile App Control</h4>
+        <p>Control, monitor, and schedule watering from anywhere with our elegant iOS & Android app (AquaTouch & AquaFusion).</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0118 0M12 3v18M5 8l14 8M5 16l14-8"/></svg></div>
+        <h4>Smart Water Usage</h4>
+        <p>Intelligent algorithms minimize waste and save up to 98% more water than traditional manual watering methods.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h4>Easy Setup</h4>
+        <p>Unbox, plant the sensor, connect — and you're done in under 3 minutes. No technical skills, no hassle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it Works</span>
+      <h2>From unboxing to thriving plants</h2>
+      <p>Four simple steps stand between you and a perfectly-cared-for plant collection.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num" data-num="1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <h4>Install Device</h4>
+        <p>Place the smart sensor in your plant's soil in seconds.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num" data-num="2"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>Choose Mode</h4>
+        <p>Select automatic, manual, or hybrid control — your choice.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num" data-num="3"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h4>Monitor or Automate</h4>
+        <p>Let Arbor handle watering, or track every drop via the app.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num" data-num="4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 8c-4 0-7 3-7 7a7 7 0 0014 0c0-4-3-7-7-7zM9 15l2 2 4-4"/></svg></div>
+        <h4>Healthy Plants</h4>
+        <p>Relax and enjoy consistently happy, thriving greenery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box reveal">
+    <span class="eyebrow" style="background:rgba(255,255,255,.15);color:#fff">Ready to grow?</span>
+    <h2>Give your plants the care they deserve.</h2>
+    <p>Join hundreds of plant lovers making plant care effortless with Arbor. Pre-order today and be among the first to experience smarter greenery.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Pre-order Now
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#models" class="btn btn-secondary">Compare Models</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Inquiries & Pre-orders</h2>
+        <p>Have questions or want to secure your Arbor device? Drop us a message — we typically reply within 24 hours.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1 0 2 1 2 2v12c0 1-1 2-2 2H4c-1 0-2-1-2-2V6c0-1 1-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+            <div><strong>Email</strong><span>arbor4143@gmail.com</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><strong>Phone</strong><span>8380041254 and 84460 17959</span></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><strong>Location</strong><span>Nagpur, Maharashtra, India</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form reveal" action="https://formsubmit.co/arbor4143@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Contact Form Submission from Arbor Website">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you"> <!-- Optional: redirect after submit -->
+        <div class="form-row">
+          <div class="form-group"><label>First name</label><input type="text" required placeholder="Arnav"/></div>
+          <div class="form-group"><label>Last name</label><input type="text" required placeholder="Sharma"/></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" required placeholder="you@example.com"/></div>
+        <div class="form-group">
+          <label>Interested in</label>
+          <select>
+            <option>General Inquiry</option>
+            <option>DripMate Pre-order</option>
+            <option>AquaTouch Pre-order</option>
+            <option>AquaFusion Pre-order</option>
+            <option>Partnership</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea required placeholder="Tell us about your plants or questions..."></textarea></div>
+        <button type="submit" class="btn btn-primary">Send Message
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12c0-4 3-8 8-8-1 5-4 8-8 8z"/><path d="M12 14c0-3-2-6-6-6 1 4 3 6 6 6z"/></svg></span>
+          Arbor Smart Care
+        </a>
+        <p>Smart plant care systems that blend automation and nature to help your plants thrive — effortlessly.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+          <a href="#" class="social" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21l-6.53 7.463L22 22h-6.82l-4.77-6.247L4.56 22H2l7.03-8.03L2 2h6.82l4.34 5.73L18.244 2zm-1.193 18.4h1.6L7.02 3.52H5.3l11.75 16.88z"/></svg></a>
+          <a href="#" class="social" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="social" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#models">DripMate</a></li>
+          <li><a href="#models">AquaTouch</a></li>
+          <li><a href="#models">AquaFusion</a></li>
+          <li><a href="#features">Features</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#how">How it Works</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Warranty</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div>© 2025 Arbor Smart Care. All rights reserved.</div>
+      <div class="tagline">Smarter Care for Greener Living 🌿</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Mobile menu
+const toggle = document.getElementById('menuToggle');
+const links = document.getElementById('navLinks');
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('active');
+  links.classList.toggle('open');
+});
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  toggle.classList.remove('active');
+  links.classList.remove('open');
+}));
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
